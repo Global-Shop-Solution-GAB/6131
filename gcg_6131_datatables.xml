@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="yes"?>
+<Recordset>
+  <xs:schema id="Recordset" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="Recordset" msdata:IsDataSet="true" msdata:MainDataTable="DTORDERS" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="DTORDERS">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ORDERKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="ORDERNO" type="xs:string" minOccurs="0" />
+                <xs:element name="CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="NAME_CUSTOMER" type="xs:string" minOccurs="0" />
+                <xs:element name="EXPECTEDSALE" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2Line).PROJECTED_SALE)" type="xs:double" minOccurs="0" />
+                <xs:element name="SHOURS" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2Line).LHOURS)" type="xs:double" minOccurs="0" />
+                <xs:element name="SLABOR" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LLABOR)" type="xs:double" minOccurs="0" />
+                <xs:element name="SOVERHEAD" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LOVERHEAD)" type="xs:double" minOccurs="0" />
+                <xs:element name="SMATERIAL" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LMATERIAL)" type="xs:double" minOccurs="0" />
+                <xs:element name="SOUTSIDE" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LOUTSIDE)" type="xs:double" minOccurs="0" />
+                <xs:element name="SFREIGHT" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LFREIGHT)" type="xs:double" minOccurs="0" />
+                <xs:element name="SOTHER" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Order2LIne).LOTHER)" type="xs:double" minOccurs="0" />
+                <xs:element name="SEXTENDED" msdata:ReadOnly="true" msdata:Expression="IIF(Sum(Child(Order2LIne).LEXTENDED)&gt;0,Sum(Child(Order2LIne).LEXTENDED) ,0)" type="xs:double" minOccurs="0" />
+                <xs:element name="TOTALCOST" msdata:ReadOnly="true" msdata:Expression="SLABOR + SOVERHEAD + SMATERIAL + SOUTSIDE + SFREIGHT + SOTHER" type="xs:double" minOccurs="0" />
+                <xs:element name="MARGIN" msdata:ReadOnly="true" msdata:Expression="IIF(SEXTENDED &gt; 0, (SEXTENDED - TOTALCOST) / SEXTENDED, 0)" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="DTORDLINES">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ORDERKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="ORDERLINEKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="LINE_TYPE" type="xs:string" minOccurs="0" />
+                <xs:element name="LINE" type="xs:string" minOccurs="0" />
+                <xs:element name="PART" type="xs:string" minOccurs="0" />
+                <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT_LINE" type="xs:string" minOccurs="0" />
+                <xs:element name="QTY_ORDERED" type="xs:decimal" minOccurs="0" />
+                <xs:element name="DPRICE" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="PROJECTED_SALE" msdata:ReadOnly="true" msdata:Expression="IIF(LINE_TYPE &lt;&gt; 'P',QTY_ORDERED * DPRICE,0)" type="xs:double" minOccurs="0" />
+                <xs:element name="LHOURS" msdata:ReadOnly="true" msdata:Expression="Sum(CHILD(Line2Records).HOURS)" type="xs:double" minOccurs="0" />
+                <xs:element name="LLABOR" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).LABOR)" type="xs:double" minOccurs="0" />
+                <xs:element name="LOVERHEAD" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).OVERHEAD)" type="xs:double" minOccurs="0" />
+                <xs:element name="LMATERIAL" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).MATERIAL)" type="xs:double" minOccurs="0" />
+                <xs:element name="LOUTSIDE" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).OUTSIDE)" type="xs:double" minOccurs="0" />
+                <xs:element name="LFREIGHT" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).FREIGHT)" type="xs:double" minOccurs="0" />
+                <xs:element name="LOTHER" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).OTHER)" type="xs:double" minOccurs="0" />
+                <xs:element name="LQTYSHIPPED" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).SHIPPED)" type="xs:double" minOccurs="0" />
+                <xs:element name="LEXTENDED" msdata:ReadOnly="true" msdata:Expression="Sum(Child(Line2Records).EXTENDED)" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="DTORDLINES_x0024_DTJOBS">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ORDERKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="ORDERLINEKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="JOBKEY" type="xs:string" minOccurs="0" />
+                <xs:element name="ORDERNO" type="xs:string" minOccurs="0" />
+                <xs:element name="SUFFIX" type="xs:string" minOccurs="0" />
+                <xs:element name="LINE" type="xs:string" minOccurs="0" />
+                <xs:element name="TYPE" type="xs:string" minOccurs="0" />
+                <xs:element name="JOB" type="xs:string" minOccurs="0" />
+                <xs:element name="JOBSUF" type="xs:string" minOccurs="0" />
+                <xs:element name="INVOICE" type="xs:string" minOccurs="0" />
+                <xs:element name="PART" type="xs:string" minOccurs="0" />
+                <xs:element name="DESCRIPTION" type="xs:string" minOccurs="0" />
+                <xs:element name="PRODUCT_LINE" type="xs:string" minOccurs="0" />
+                <xs:element name="QTY_ORDERED" type="xs:decimal" minOccurs="0" />
+                <xs:element name="DPRICE" type="xs:decimal" minOccurs="0" />
+                <xs:element name="COMPLETE" type="xs:double" minOccurs="0" />
+                <xs:element name="SHIPPED" type="xs:double" minOccurs="0" />
+                <xs:element name="ORDER_DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="DUE_DATE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="WEEKS" type="xs:double" minOccurs="0" />
+                <xs:element name="WIP" type="xs:string" minOccurs="0" />
+                <xs:element name="PROJECTED_SALE" msdata:ReadOnly="true" msdata:Expression="IIF(TYPE = 'JOB',IIF(SHIPPED = 0,DPRICE * QTY_ORDERED,0),0)" type="xs:double" minOccurs="0" />
+                <xs:element name="HOURS" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="OUTSIDE" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="MATERIAL" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="LABOR" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="OVERHEAD" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="FREIGHT" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="OTHER" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="TOTAL" msdata:ReadOnly="true" msdata:Expression="OUTSIDE + MATERIAL + LABOR + OVERHEAD + FREIGHT + OTHER" type="xs:double" minOccurs="0" />
+                <xs:element name="ONPO" type="xs:double" default="0" minOccurs="0" />
+                <xs:element name="TOTAL_PLUS" msdata:ReadOnly="true" msdata:Expression="TOTAL + ONPO" type="xs:double" minOccurs="0" />
+                <xs:element name="DATE_SHIPPED" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="PACKLIST" type="xs:string" minOccurs="0" />
+                <xs:element name="DATE_INVOICE" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="EXTENDED" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="Constraint1">
+        <xs:selector xpath=".//DTORDERS" />
+        <xs:field xpath="ORDERKEY" />
+      </xs:unique>
+      <xs:unique name="DTORDLINES_Constraint1" msdata:ConstraintName="Constraint1">
+        <xs:selector xpath=".//DTORDLINES" />
+        <xs:field xpath="ORDERLINEKEY" />
+      </xs:unique>
+      <xs:keyref name="LINE2RECORDS" refer="DTORDLINES_Constraint1">
+        <xs:selector xpath=".//DTORDLINES_x0024_DTJOBS" />
+        <xs:field xpath="ORDERLINEKEY" />
+      </xs:keyref>
+      <xs:keyref name="ORDER2LINE" refer="Constraint1">
+        <xs:selector xpath=".//DTORDLINES" />
+        <xs:field xpath="ORDERKEY" />
+      </xs:keyref>
+    </xs:element>
+  </xs:schema>
+</Recordset>
